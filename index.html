@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- <form>
+    <input type="text" class="title" name="title" id="">
+    <input type="file" class="file" name="file" id="">
+    <button>submit</button>
+  </form> -->
+
+  <button> checkout once</button>
+
+</body>
+
+</html>
+<!-- <script>
+    const form = document.querySelector("form");
+    const title = document.querySelector(".title");
+
+    form.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        const data = new FormData();
+        const file = event.target.file.files[0];
+        const title = event.target.title.value;
+        data.append("post[image]", file);
+        data.append("post[title]", title)
+
+        fetch("http://localhost:3000/posts",{
+            method: "POST",
+            body: data
+        })
+        .then( res => res.json())
+        .then( data => console.log(data) )
+
+    })
+</script> -->
+
+<!-- <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" crossorigin="anonymous"></script> -->
+<script>
+  const btn = document.querySelector("button");
+
+  btn.addEventListener("click", (e)=>{
+    e.preventDefault();
+    fetch("https://once-api.herokuapp.com/init", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ amount: "90000", host: window.location.host  })
+    }).then(res => res.json())
+    .then( res => window.open( res.url, "New Window", `width=500,height=700,top=${(screen.height - 700)/4},left=${ (screen.width - 500)/2 }` ))
+  })
+
+  
+</script>

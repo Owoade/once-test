@@ -43,21 +43,20 @@
     })
 </script> -->
 
-<!-- <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" crossorigin="anonymous"></script> -->
+<script src="https://cdn.socket.io/4.5.3/socket.io.min.js" crossorigin="anonymous"></script>
+<script src="https://once-checkout-vanilla-sdk.vercel.app/build/sdk.js"></script>
 <script>
-  const btn = document.querySelector("button");
-
-  btn.addEventListener("click", (e)=>{
-    e.preventDefault();
-    fetch("https://once-api.herokuapp.com/init", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ amount: "90000", host: window.location.host  })
-    }).then(res => res.json())
-    .then( res => window.open( res.url, "New Window", `width=500,height=700,top=${(screen.height - 700)/4},left=${ (screen.width - 500)/2 }` ))
-  })
-
-  
+    const btn = document.querySelector("button");
+    function handleCheckout(e){
+        e.preventDefault();
+        const payload = {
+            amount: 10000,
+            successCallback(){
+                document.write("<h1>Transaction Successfull</h1>")
+            }
+        }
+        const once = new Once( payload );
+        once.checkout()
+    }
+    btn.addEventListener("click", handleCheckout)
 </script>
